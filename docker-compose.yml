@@ -1,0 +1,37 @@
+# Bu araç @keyiflerolsun tarafından | @KekikAkademi için yazılmıştır.
+
+version: "3.9"
+
+networks:
+    local:
+        driver: bridge
+
+services:
+
+    urunapi_py:
+        container_name: urunapi_py
+        image: urunapi_py:latest
+        restart: always
+        build: ./UrunAPI_PY
+
+        networks:
+            - local
+        volumes:
+            - ./UrunAPI_PY:/usr/src/UrunAPI_PY
+        ports:
+            - 3310:5000
+
+
+    website_php:
+        container_name: website_php
+        image: php:apache
+        restart: always
+
+        networks:
+            - local
+        volumes:
+            - ./WebSite_PHP:/var/www/html
+        ports:
+            - 1453:80
+        depends_on:
+            - urunapi_py

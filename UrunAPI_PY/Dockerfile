@@ -3,6 +3,9 @@
 # * Docker İmajı
 FROM python:3.10.8-slim-buster
 
+# * Zaman Dilimi
+ENV TZ="Europe/Istanbul"
+
 # * Çalışma Alanı
 WORKDIR /usr/src/UrunAPI_PY
 COPY ./ /usr/src/UrunAPI_PY

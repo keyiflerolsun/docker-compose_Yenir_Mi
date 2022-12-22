@@ -100,3 +100,22 @@ docker restart mongodb
 # https://nginxproxymanager.com/guide/#quick-setup
 docker run -d --name=nginx-proxy-manager --restart=unless-stopped -p 80:80 -p 81:81 -p 443:443 -v /root/nginx-proxy-manager/data:/data -v /root/nginx-proxy-manager/letsencrypt:/etc/letsencrypt jc21/nginx-proxy-manager:latest
 ```
+
+
+### XAMPP
+
+> [tomsik68/xampp](https://hub.docker.com/r/tomsik68/xampp)
+
+```bash
+docker run --name myXampp -p 41061:22 -p 41062:80 -p 41063:3306 -d -v ~/my_web_pages:/www tomsik68/xampp
+docker exec -it myXampp bash
+export PATH=/opt/lampp/bin:$PATH
+
+
+mysql mysql
+GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'root';
+FLUSH PRIVILEGES;
+
+
+scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
+```

@@ -1,8 +1,8 @@
-# docker-compose Yenir Mi?
+# 🐳 docker-compose Yenir Mi?
 
 *Bu depo **temel olarak** `Docker` ve `docker-compose` kullanımına örnek teşkil etmesi amacıyla oluşturulmuştur.*
 
-## Akış Diyagramı
+## 🎛 Akış Diyagramı
 
  - `docker-compose up -d`
 	 - *Python Flask API* ve *PHP Arayüz*ün ortak kullanacağı `local` adında bir ağ başlatır.
@@ -16,7 +16,7 @@
 			 - `urunapi_py` konteyneri başladıktan sonra başlaması için bağımlılık tanımlar.
 			 - Konteyner içerisinde `80` portundan yayın yapan *apache*'yi yerelde `1453` portuna yönlendirir.
 
-## Temel Komutlar
+## 💡 Temel Komutlar
 
 ### Başlat - Durdur - Sil
 
@@ -60,7 +60,7 @@ docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'
 docker exec -it <container_id|container_name> bash
 ```
 
-## Sevilen İmajlar
+## 📦 Sevilen İmajlar
 
 ### Portainer
 

@@ -58,7 +58,7 @@ docker-compose up -d --force-recreate --no-deps --build servis_adi
 ### Gözlemle - Bağlan - Düzenle
 
 ```bash
-docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'
+docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}'
 
 docker exec -it <container_id|container_name> bash
 ```
@@ -78,10 +78,7 @@ docker run -d --name=portainer --restart=always -p 8000:8000 -p 9000:9000 -v /va
 > [mongo](https://hub.docker.com/_/mongo)
 
 ```bash
-docker run -d --name mongodb --restart unless-stopped -p 27017:27017 \
-  -e MONGO_INITDB_ROOT_USERNAME=keyiflerolsun \
-  -e MONGO_INITDB_ROOT_PASSWORD=sifre \
-  mongo:latest --auth
+docker run -d --name mongodb --restart unless-stopped -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=keyiflerolsun -e MONGO_INITDB_ROOT_PASSWORD=sifre mongo:latest --auth
 ```
 
 #### veya

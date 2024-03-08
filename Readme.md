@@ -137,9 +137,9 @@ scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
 ```bash
 docker run -d \
   --name=wg-easy \
-  -e LANG=de \
-  -e WG_HOST=🚨SERVER_IP🚨 \
-  -e PASSWORD=🚨ADMIN_PASSWORD🚨 \
+  -e LANG=tr \
+  -e WG_HOST=🚨IP_ADRESI🚨 \
+  -e PASSWORD=🚨ADMIN_SIFRESI🚨 \
   -v ~/.wg-easy:/etc/wireguard \
   -p 51820:51820/udp \
   -p 51821:51821/tcp \

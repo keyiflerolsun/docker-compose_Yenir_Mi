@@ -1,10 +1,10 @@
-# 🐳 docker-compose Yenir Mi?
+# 🐳 docker compose Yenir Mi?
 
-*Bu depo **temel olarak** `Docker` ve `docker-compose` kullanımına örnek teşkil etmesi amacıyla oluşturulmuştur.*
+*Bu depo **temel olarak** `Docker` ve `docker compose` kullanımına örnek teşkil etmesi amacıyla oluşturulmuştur.*
 
 ## 🎛 Akış Diyagramı
 
- - `docker-compose up -d`
+ - `docker compose up -d`
 	 - *Python Flask API* ve *PHP Arayüz*ün ortak kullanacağı `local` adında bir ağ başlatır.
 		 - `urunapi_py`
 			 - `UrunAPI_PY` dizinindeki `Dockerfile`'ı derler ve çalıştırır. » `restart=always`
@@ -40,19 +40,19 @@ docker stop website_php
 
 ```bash
 # Compose Başlat
-docker-compose up -d
+docker compose up -d
 
 # Compose Yeniden Derle / Başlat
-docker-compose up -d --build
+docker compose up -d --build
 
 # Compose Durdur
-docker-compose down -v
+docker compose down -v
 
 # Sistemdeki Kullanılmayan Şeyleri Sil
 docker system prune -a
 
 # Compose içindeki tek bir servisi yeniden derle ve ayağa kaldır
-docker-compose up -d --force-recreate --no-deps --build servis_adi
+docker compose up -d --force-recreate --no-deps --build servis_adi
 ```
 
 ### Gözlemle - Bağlan - Düzenle
@@ -127,4 +127,26 @@ FLUSH PRIVILEGES;
 
 
 scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
+```
+
+
+### WireGuard
+
+> [wg-easy/wg-easy](https://github.com/wg-easy/wg-easy)
+
+```bash
+docker run -d \
+  --name=wg-easy \
+  -e LANG=de \
+  -e WG_HOST=🚨SERVER_IP🚨 \
+  -e PASSWORD=🚨ADMIN_PASSWORD🚨 \
+  -v ~/.wg-easy:/etc/wireguard \
+  -p 51820:51820/udp \
+  -p 51821:51821/tcp \
+  --cap-add=NET_ADMIN \
+  --cap-add=SYS_MODULE \
+  --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
+  --sysctl="net.ipv4.ip_forward=1" \
+  --restart unless-stopped \
+  ghcr.io/wg-easy/wg-easy
 ```

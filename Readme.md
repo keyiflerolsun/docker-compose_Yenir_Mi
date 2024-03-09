@@ -150,3 +150,37 @@ docker run -d \
   --restart unless-stopped \
   ghcr.io/wg-easy/wg-easy
 ```
+
+
+### Homarr
+
+> [ajnart/homarr](https://github.com/ajnart/homarr)
+
+```bash
+docker run -d \
+  --name homarr \
+  --restart unless-stopped \
+  -p 7575:7575 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v ~/homarr/configs:/app/data/configs \
+  -v ~/homarr/data:/data \
+  -v ~/homarr/icons:/app/public/icons \
+  ghcr.io/ajnart/homarr:latest
+```
+
+
+### Dash.
+
+> [MauriceNino/dashdot](https://github.com/MauriceNino/dashdot)
+
+```bash
+docker container run -d \
+  --name dashdot \
+  --restart=always \
+  -p 3001:3001 \
+  -v /:/mnt/host:ro \
+  --env DASHDOT_FS_DEVICE_FILTER="sdb" \
+  --env DASHDOT_NETWORK_SPEED_AS_BYTES=true \
+  --privileged \
+  mauricenino/dashdot
+```

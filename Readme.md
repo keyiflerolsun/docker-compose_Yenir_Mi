@@ -65,15 +65,26 @@ docker exec -it <container_id|container_name> bash
 
 ## 📦 Sevilen İmajlar
 
-### Portainer
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Portainer</b>
+  </summary>
+  <br/>
 
 > [portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce)
 
 ```bash
 docker run -d --name=portainer --restart=always -p 8000:8000 -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 ```
+</details>
 
-### MongoDB
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>MongoDB</b>
+  </summary>
+  <br/>
 
 > [mongo](https://hub.docker.com/_/mongo)
 
@@ -100,8 +111,15 @@ db.createUser({
 ```bash
 docker restart mongodb
 ```
+</details>
 
-### Nginx Proxy Manager
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Nginx Proxy Manager</b>
+  </summary>
+  <br/>
 
 > [jc21/nginx-proxy-manager](https://hub.docker.com/r/jc21/nginx-proxy-manager)
 
@@ -109,9 +127,15 @@ docker restart mongodb
 # https://nginxproxymanager.com/guide/#quick-setup
 docker run -d --name=nginx-proxy-manager --restart=unless-stopped -p 80:80 -p 81:81 -p 443:443 -v /root/nginx-proxy-manager/data:/data -v /root/nginx-proxy-manager/letsencrypt:/etc/letsencrypt jc21/nginx-proxy-manager:latest
 ```
+</details>
 
 
-### XAMPP
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>XAMPP</b>
+  </summary>
+  <br/>
 
 > [tomsik68/xampp](https://hub.docker.com/r/tomsik68/xampp)
 
@@ -128,9 +152,15 @@ FLUSH PRIVILEGES;
 
 scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
 ```
+</details>
 
 
-### WireGuard
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>WireGuard</b>
+  </summary>
+  <br/>
 
 > [wg-easy/wg-easy](https://github.com/wg-easy/wg-easy)
 
@@ -150,9 +180,15 @@ docker run -d \
   --restart unless-stopped \
   ghcr.io/wg-easy/wg-easy
 ```
+</details>
 
 
-### Homarr
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Homarr</b>
+  </summary>
+  <br/>
 
 > [ajnart/homarr](https://github.com/ajnart/homarr)
 
@@ -167,9 +203,15 @@ docker run -d \
   -v ~/homarr/icons:/app/public/icons \
   ghcr.io/ajnart/homarr:latest
 ```
+</details>
 
 
-### Dash.
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Dash.</b>
+  </summary>
+  <br/>
 
 > [MauriceNino/dashdot](https://github.com/MauriceNino/dashdot)
 
@@ -184,3 +226,4 @@ docker container run -d \
   --privileged \
   mauricenino/dashdot
 ```
+</details>

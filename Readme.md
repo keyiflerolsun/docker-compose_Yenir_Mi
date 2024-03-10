@@ -89,6 +89,23 @@ docker run -d \
 
 <details>
   <summary style="font-weight: bold; font-size: 18px">
+    <b>FileBrowser</b>
+  </summary>
+  <br/>
+
+> [hurlenko/filebrowser-docker](https://github.com/hurlenko/filebrowser-docker)
+
+```bash
+docker run -d \
+  --name=filebrowser \
+  -p 8083:8080 \
+  hurlenko/filebrowser
+```
+</details>
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
     <b>WireGuard</b>
   </summary>
   <br/>

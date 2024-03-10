@@ -216,7 +216,7 @@ docker run -d \
 > [MauriceNino/dashdot](https://github.com/MauriceNino/dashdot)
 
 ```bash
-docker container run -d \
+docker run -d \
   --name dashdot \
   --restart=always \
   -p 3001:3001 \
@@ -226,4 +226,75 @@ docker container run -d \
   --privileged \
   mauricenino/dashdot
 ```
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>aria2-ui</b>
+  </summary>
+  <br/>
+
+> [huangzulin/aria2-ui](https://github.com/huangzulin/aria2-ui)
+
+```bash
+docker run -d \
+  --name aria2-ui \
+  --restart=always \
+  -p 6800:6800 \
+  -p 6880:80 \
+  -p 6888:81 \
+  -v ~/Downloads:/aria2/downloads \
+  huangzulin/aria2-ui
+```
+</details>
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>NextCloud</b>
+  </summary>
+  <br/>
+
+> [nextcloud/docker](https://github.com/nextcloud/docker)
+
+```bash
+version: '2'
+
+volumes:
+  nextcloud:
+  db:
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=🚨🚨🚨🚨🚨🚨
+      - MYSQL_PASSWORD=🚨🚨🚨🚨🚨🚨
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=🚨🚨🚨🚨🚨🚨
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+```
+
+> [CLI Client](https://docs.nextcloud.com/desktop/latest/advancedusage.html#nextcloud-command-line-client)
+
 </details>

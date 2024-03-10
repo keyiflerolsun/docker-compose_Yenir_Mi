@@ -74,7 +74,14 @@ docker exec -it <container_id|container_name> bash
 > [portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce)
 
 ```bash
-docker run -d --name=portainer --restart=always -p 8000:8000 -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+docker run -d \
+  --name=portainer \
+  --restart=always \
+  -p 8000:8000 \
+  -p 9000:9000 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data \
+  portainer/portainer-ce:latest
 ```
 </details>
 
@@ -89,21 +96,36 @@ docker run -d --name=portainer --restart=always -p 8000:8000 -p 9000:9000 -v /va
 > [mongo](https://hub.docker.com/_/mongo)
 
 ```bash
-docker run -d --name mongodb --restart unless-stopped -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=keyiflerolsun -e MONGO_INITDB_ROOT_PASSWORD=sifre mongo:latest --auth
+docker run -d \
+  --name mongodb\
+  --restart unless-stopped \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=🚨🚨🚨USER🚨🚨🚨 \
+  -e MONGO_INITDB_ROOT_PASSWORD=🚨🚨🚨PASS🚨🚨🚨 \
+  --auth \
+  mongo:latest
 ```
 
 #### veya
 
 ```bash
-docker run -d --name=mongodb --restart=unless-stopped -p 27017:27017 mongo:latest --auth
+docker run -d \
+  --name=mongodb \
+  --restart=unless-stopped \
+  -p 27017:27017 \
+  --auth \
+  mongo:latest
+```
+
+```bash
 docker exec -it mongodb mongosh
 ```
 
 ```mongosh
 use admin
 db.createUser({
-    user: "keyiflerolsun",
-    pwd: "sifre",
+    user: "🚨🚨🚨USER🚨🚨🚨",
+    pwd: "🚨🚨🚨PASS🚨🚨🚨",
     roles: ["root", "dbAdminAnyDatabase", "clusterAdmin", {role: "dbOwner", db:"admin"}]
 })
 ```
@@ -125,7 +147,15 @@ docker restart mongodb
 
 ```bash
 # https://nginxproxymanager.com/guide/#quick-setup
-docker run -d --name=nginx-proxy-manager --restart=unless-stopped -p 80:80 -p 81:81 -p 443:443 -v /root/nginx-proxy-manager/data:/data -v /root/nginx-proxy-manager/letsencrypt:/etc/letsencrypt jc21/nginx-proxy-manager:latest
+docker run -d \
+  --name=nginx-proxy-manager \
+  --restart=unless-stopped \
+  -p 80:80 \
+  -p 81:81 \
+  -p 443:443 \
+  -v /root/nginx-proxy-manager/data:/data \
+  -v /root/nginx-proxy-manager/letsencrypt:/etc/letsencrypt \
+  jc21/nginx-proxy-manager:latest
 ```
 </details>
 
@@ -134,23 +164,100 @@ docker run -d --name=nginx-proxy-manager --restart=unless-stopped -p 80:80 -p 81
 <details>
   <summary style="font-weight: bold; font-size: 18px">
     <b>XAMPP</b>
+    <i>(MySQL)</i>
   </summary>
   <br/>
 
 > [tomsik68/xampp](https://hub.docker.com/r/tomsik68/xampp)
 
 ```bash
-docker run --name=myXampp --restart=always -p 41061:22 -p 41062:80 -p 41063:3306 -d -v ~/my_web_pages:/www tomsik68/xampp
+docker run -d \
+  --name=myXampp \
+  --restart=always \
+  -p 41061:22 \
+  -p 41062:80 \
+  -p 41063:3306 \
+  -v ~/www:/www \
+  tomsik68/xampp
+```
+
+```bash
 docker exec -it myXampp bash
+
 export PATH=/opt/lampp/bin:$PATH
 
-
 mysql mysql
+
 GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'root';
 FLUSH PRIVILEGES;
+```
 
-
+```bash
 scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
+```
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>PostgreSQL</b>
+  </summary>
+  <br/>
+
+> [compose-postgres](https://github.com/khezen/compose-postgres)
+
+```yaml
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-🚨🚨🚨USER🚨🚨🚨}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-🚨🚨🚨PASS🚨🚨🚨}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-🚨🚨🚨MAIL🚨🚨🚨}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-🚨🚨🚨PASS🚨🚨🚨}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:
+    pgadmin:
+```
+
+```bash
+docker exec -it postgres_container psql -U 🚨🚨🚨USER🚨🚨🚨
+
+CREATE DATABASE 🚨🚨🚨DB🚨🚨🚨;
+\q
+
+docker exec -i postgres_container psql -U 🚨🚨🚨USER🚨🚨🚨 -d 🚨🚨🚨DB🚨🚨🚨 < data_dump.sql
 ```
 </details>
 
@@ -168,8 +275,8 @@ scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
 docker run -d \
   --name=wg-easy \
   -e LANG=tr \
-  -e WG_HOST=🚨IP_ADRESI🚨 \
-  -e PASSWORD=🚨ADMIN_SIFRESI🚨 \
+  -e WG_HOST=🚨🚨🚨IP_ADRESI🚨🚨🚨 \
+  -e PASSWORD=🚨🚨🚨ADMIN_SIFRESI🚨🚨🚨 \
   -v ~/.wg-easy:/etc/wireguard \
   -p 51820:51820/udp \
   -p 51821:51821/tcp \
@@ -232,7 +339,7 @@ docker run -d \
 
 <details>
   <summary style="font-weight: bold; font-size: 18px">
-    <b>aria2-ui</b>
+    <b>aria2 & AriaNg</b>
   </summary>
   <br/>
 
@@ -259,7 +366,7 @@ docker run -d \
 
 > [nextcloud/docker](https://github.com/nextcloud/docker)
 
-```bash
+```yaml
 version: '2'
 
 volumes:
@@ -274,8 +381,8 @@ services:
     volumes:
       - db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=🚨🚨🚨🚨🚨🚨
-      - MYSQL_PASSWORD=🚨🚨🚨🚨🚨🚨
+      - MYSQL_ROOT_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
+      - MYSQL_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
 
@@ -289,7 +396,7 @@ services:
     volumes:
       - nextcloud:/var/www/html
     environment:
-      - MYSQL_PASSWORD=🚨🚨🚨🚨🚨🚨
+      - MYSQL_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db

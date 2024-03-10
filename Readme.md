@@ -199,6 +199,28 @@ docker run -d \
 </details>
 
 
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>MiniDLNA</b>
+  </summary>
+  <br/>
+
+> [vladgh/minidlna](https://github.com/vladgh/docker_base_images/tree/main/minidlna)
+
+```bash
+docker run -d \
+  --name=minidlna \
+  --net=host \
+  -v ~/Downloads:/media \
+  -e TZ=Europe/Istanbul \
+  -e MINIDLNA_MEDIA_DIR=/media \
+  -e MINIDLNA_FRIENDLY_NAME=MiniDLNA \
+  vladgh/minidlna
+```
+</details>
+
+
 <details>
   <summary style="font-weight: bold; font-size: 18px">
     <b>NextCloud</b>

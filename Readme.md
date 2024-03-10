@@ -89,6 +89,198 @@ docker run -d \
 
 <details>
   <summary style="font-weight: bold; font-size: 18px">
+    <b>WireGuard</b>
+  </summary>
+  <br/>
+
+> [wg-easy/wg-easy](https://github.com/wg-easy/wg-easy)
+
+```bash
+docker run -d \
+  --name=wg-easy \
+  -e LANG=tr \
+  -e WG_HOST=🚨🚨🚨IP_ADRESI🚨🚨🚨 \
+  -e PASSWORD=🚨🚨🚨ADMIN_SIFRESI🚨🚨🚨 \
+  -v ~/.wg-easy:/etc/wireguard \
+  -p 51820:51820/udp \
+  -p 51821:51821/tcp \
+  --cap-add=NET_ADMIN \
+  --cap-add=SYS_MODULE \
+  --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
+  --sysctl="net.ipv4.ip_forward=1" \
+  --restart=unless-stopped \
+  ghcr.io/wg-easy/wg-easy
+```
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Homarr</b>
+  </summary>
+  <br/>
+
+> [ajnart/homarr](https://github.com/ajnart/homarr)
+
+```bash
+docker run -d \
+  --name=homarr \
+  --restart=unless-stopped \
+  -p 7575:7575 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v ~/homarr/configs:/app/data/configs \
+  -v ~/homarr/data:/data \
+  -v ~/homarr/icons:/app/public/icons \
+  ghcr.io/ajnart/homarr:latest
+```
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Dash.</b>
+  </summary>
+  <br/>
+
+> [MauriceNino/dashdot](https://github.com/MauriceNino/dashdot)
+
+```bash
+docker run -d \
+  --name=dashdot \
+  --restart=always \
+  -p 3001:3001 \
+  -v /:/mnt/host:ro \
+  --env DASHDOT_FS_DEVICE_FILTER="sdb" \
+  --env DASHDOT_NETWORK_SPEED_AS_BYTES=true \
+  --privileged \
+  mauricenino/dashdot
+```
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>aria2 & AriaNg</b>
+  </summary>
+  <br/>
+
+> [huangzulin/aria2-ui](https://github.com/huangzulin/aria2-ui)
+
+```bash
+docker run -d \
+  --name=aria2-ui \
+  --restart=always \
+  -p 6800:6800 \
+  -p 6880:80 \
+  -p 6888:81 \
+  -v ~/Downloads:/aria2/downloads \
+  huangzulin/aria2-ui
+```
+</details>
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>NextCloud</b>
+  </summary>
+  <br/>
+
+> [nextcloud/docker](https://github.com/nextcloud/docker)
+
+```yaml
+version: '2'
+
+volumes:
+  nextcloud:
+  db:
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
+      - MYSQL_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+```
+
+> [CLI Client](https://docs.nextcloud.com/desktop/latest/advancedusage.html#nextcloud-command-line-client)
+
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>CapRover</b>
+  </summary>
+  <br/>
+
+> [caprover/caprover](https://github.com/caprover/caprover)
+
+```bash
+# https://caprover.com/docs/get-started.html#step-1-caprover-installation
+docker run -d \
+  --name=caprover \
+  -p 80:80 \
+  -p 443:443 \
+  -p 3000:3000 \
+  -e ACCEPTED_TERMS=true \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /captain:/captain \
+  caprover/caprover
+```
+</details>
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Nginx Proxy Manager</b>
+  </summary>
+  <br/>
+
+> [jc21/nginx-proxy-manager](https://hub.docker.com/r/jc21/nginx-proxy-manager)
+
+```bash
+# https://nginxproxymanager.com/guide/#quick-setup
+docker run -d \
+  --name=nginx-proxy-manager \
+  --restart=unless-stopped \
+  -p 80:80 \
+  -p 81:81 \
+  -p 443:443 \
+  -v /root/nginx-proxy-manager/data:/data \
+  -v /root/nginx-proxy-manager/letsencrypt:/etc/letsencrypt \
+  jc21/nginx-proxy-manager:latest
+```
+</details>
+
+
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
     <b>MongoDB</b>
   </summary>
   <br/>
@@ -97,8 +289,8 @@ docker run -d \
 
 ```bash
 docker run -d \
-  --name mongodb\
-  --restart unless-stopped \
+  --name=mongodb\
+  --restart=unless-stopped \
   -p 27017:27017 \
   -e MONGO_INITDB_ROOT_USERNAME=🚨🚨🚨USER🚨🚨🚨 \
   -e MONGO_INITDB_ROOT_PASSWORD=🚨🚨🚨PASS🚨🚨🚨 \
@@ -132,30 +324,6 @@ db.createUser({
 
 ```bash
 docker restart mongodb
-```
-</details>
-
-
-
-<details>
-  <summary style="font-weight: bold; font-size: 18px">
-    <b>Nginx Proxy Manager</b>
-  </summary>
-  <br/>
-
-> [jc21/nginx-proxy-manager](https://hub.docker.com/r/jc21/nginx-proxy-manager)
-
-```bash
-# https://nginxproxymanager.com/guide/#quick-setup
-docker run -d \
-  --name=nginx-proxy-manager \
-  --restart=unless-stopped \
-  -p 80:80 \
-  -p 81:81 \
-  -p 443:443 \
-  -v /root/nginx-proxy-manager/data:/data \
-  -v /root/nginx-proxy-manager/letsencrypt:/etc/letsencrypt \
-  jc21/nginx-proxy-manager:latest
 ```
 </details>
 
@@ -259,149 +427,4 @@ CREATE DATABASE 🚨🚨🚨DB🚨🚨🚨;
 
 docker exec -i postgres_container psql -U 🚨🚨🚨USER🚨🚨🚨 -d 🚨🚨🚨DB🚨🚨🚨 < data_dump.sql
 ```
-</details>
-
-
-
-<details>
-  <summary style="font-weight: bold; font-size: 18px">
-    <b>WireGuard</b>
-  </summary>
-  <br/>
-
-> [wg-easy/wg-easy](https://github.com/wg-easy/wg-easy)
-
-```bash
-docker run -d \
-  --name=wg-easy \
-  -e LANG=tr \
-  -e WG_HOST=🚨🚨🚨IP_ADRESI🚨🚨🚨 \
-  -e PASSWORD=🚨🚨🚨ADMIN_SIFRESI🚨🚨🚨 \
-  -v ~/.wg-easy:/etc/wireguard \
-  -p 51820:51820/udp \
-  -p 51821:51821/tcp \
-  --cap-add=NET_ADMIN \
-  --cap-add=SYS_MODULE \
-  --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
-  --sysctl="net.ipv4.ip_forward=1" \
-  --restart unless-stopped \
-  ghcr.io/wg-easy/wg-easy
-```
-</details>
-
-
-
-<details>
-  <summary style="font-weight: bold; font-size: 18px">
-    <b>Homarr</b>
-  </summary>
-  <br/>
-
-> [ajnart/homarr](https://github.com/ajnart/homarr)
-
-```bash
-docker run -d \
-  --name homarr \
-  --restart unless-stopped \
-  -p 7575:7575 \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v ~/homarr/configs:/app/data/configs \
-  -v ~/homarr/data:/data \
-  -v ~/homarr/icons:/app/public/icons \
-  ghcr.io/ajnart/homarr:latest
-```
-</details>
-
-
-
-<details>
-  <summary style="font-weight: bold; font-size: 18px">
-    <b>Dash.</b>
-  </summary>
-  <br/>
-
-> [MauriceNino/dashdot](https://github.com/MauriceNino/dashdot)
-
-```bash
-docker run -d \
-  --name dashdot \
-  --restart=always \
-  -p 3001:3001 \
-  -v /:/mnt/host:ro \
-  --env DASHDOT_FS_DEVICE_FILTER="sdb" \
-  --env DASHDOT_NETWORK_SPEED_AS_BYTES=true \
-  --privileged \
-  mauricenino/dashdot
-```
-</details>
-
-
-
-<details>
-  <summary style="font-weight: bold; font-size: 18px">
-    <b>aria2 & AriaNg</b>
-  </summary>
-  <br/>
-
-> [huangzulin/aria2-ui](https://github.com/huangzulin/aria2-ui)
-
-```bash
-docker run -d \
-  --name aria2-ui \
-  --restart=always \
-  -p 6800:6800 \
-  -p 6880:80 \
-  -p 6888:81 \
-  -v ~/Downloads:/aria2/downloads \
-  huangzulin/aria2-ui
-```
-</details>
-
-
-<details>
-  <summary style="font-weight: bold; font-size: 18px">
-    <b>NextCloud</b>
-  </summary>
-  <br/>
-
-> [nextcloud/docker](https://github.com/nextcloud/docker)
-
-```yaml
-version: '2'
-
-volumes:
-  nextcloud:
-  db:
-
-services:
-  db:
-    image: mariadb:10.6
-    restart: always
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
-    volumes:
-      - db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
-      - MYSQL_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-
-  app:
-    image: nextcloud
-    restart: always
-    ports:
-      - 8080:80
-    links:
-      - db
-    volumes:
-      - nextcloud:/var/www/html
-    environment:
-      - MYSQL_PASSWORD=🚨🚨🚨PASS🚨🚨🚨
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
-```
-
-> [CLI Client](https://docs.nextcloud.com/desktop/latest/advancedusage.html#nextcloud-command-line-client)
-
 </details>

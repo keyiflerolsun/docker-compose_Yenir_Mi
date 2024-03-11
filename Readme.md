@@ -243,8 +243,8 @@ docker run -d \
   -v ~/Downloads:/mount \
   -v ~/Secure_Downloads:/secure_mount \
   -e TZ=Europe/Istanbul \
-  ghcr.io/keyiflerolsun/samba:latest -p \
-  -w "WORKGROUP" \
+  ghcr.io/keyiflerolsun/samba:latest \
+  -w "WORKGROUP" -n -p \
   -g "netbios name = SAMBA" \
   -s "public;/mount;yes;no;yes;all;none;İndirilenler" \
   -u "🚨USER🚨;🚨PASS🚨" \

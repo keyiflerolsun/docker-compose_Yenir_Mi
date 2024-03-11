@@ -211,6 +211,7 @@ docker run -d \
 ```bash
 docker run -d \
   --name=minidlna \
+  --restart=always \
   --net=host \
   -v ~/Downloads:/media \
   -e TZ=Europe/Istanbul \
@@ -229,6 +230,7 @@ docker run -d \
 
 > [nextcloud/docker](https://github.com/nextcloud/docker)
 
+#### `docker-compose.yml`
 ```yaml
 version: '2'
 
@@ -238,6 +240,7 @@ volumes:
 
 services:
   db:
+    container_name: nextcloud_mariadb
     image: mariadb:10.6
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
@@ -250,6 +253,7 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
+    container_name: nextcloud_app
     image: nextcloud
     restart: always
     ports:
@@ -414,6 +418,7 @@ scp -P 41061 -r * root@localhost:/opt/lampp/var/mysql/keyif/.
 
 > [compose-postgres](https://github.com/khezen/compose-postgres)
 
+#### `docker-compose.yml`
 ```yaml
 version: '3.5'
 

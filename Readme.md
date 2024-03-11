@@ -222,6 +222,43 @@ docker run -d \
 </details>
 
 
+
+<details>
+  <summary style="font-weight: bold; font-size: 18px">
+    <b>Samba</b>
+    <i>(SMB)</i>
+  </summary>
+  <br/>
+
+> [dperson/samba](https://github.com/dperson/samba)
+
+```bash
+docker run -d \
+  --name=samba \
+  --restart=always \
+  -p 139:139 \
+  -p 445:445 \
+  -v ~/Downloads:/mount \
+  -v ~/Secure_Downloads:/secure_mount \
+  -e TZ=Europe/Istanbul \
+  dperson/samba -w "WORKGROUP" -p \
+  -s "public;/mount;yes;no;yes;all;none;İndirilenler" \
+  -u "🚨USER🚨;🚨PASS🚨" \
+  -s "secure;/secure_mount;yes;no;no;🚨USER🚨;none;Secure İndirilenler"
+```
+    public       : Gözükecek Dizin Adı
+    /mount       : Konteyner içindeki yol
+    yes          : Gözükebilir
+    no           : Salt Okunur
+    yes          : Misafir Erişimi
+    all          : Erişebilir Kullanıcılar
+    none         : Yönetici Kullanıcılar (Sat Okunur ise)
+    İndirilenler : Açıklama
+
+</details>
+
+
+
 <details>
   <summary style="font-weight: bold; font-size: 18px">
     <b>NextCloud</b>

@@ -236,12 +236,16 @@ docker run -d \
 docker run -d \
   --name=samba \
   --restart=always \
+  --net=host \
+  -p 137:137/udp -p 138:138/udp \
   -p 139:139 \
   -p 445:445 \
   -v ~/Downloads:/mount \
   -v ~/Secure_Downloads:/secure_mount \
   -e TZ=Europe/Istanbul \
-  dperson/samba -w "WORKGROUP" -p \
+  ghcr.io/keyiflerolsun/samba:latest -p \
+  -w "WORKGROUP" \
+  -g "netbios name = SAMBA" \
   -s "public;/mount;yes;no;yes;all;none;İndirilenler" \
   -u "🚨USER🚨;🚨PASS🚨" \
   -s "secure;/secure_mount;yes;no;no;🚨USER🚨;none;Secure İndirilenler"

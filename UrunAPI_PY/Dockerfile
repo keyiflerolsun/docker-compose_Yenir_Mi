@@ -1,10 +1,13 @@
 # Bu araç @keyiflerolsun tarafından | @KekikAkademi için yazılmıştır.
 
 # * Docker İmajı
-FROM python:3.11.6-slim-bookworm
+FROM python:3.11.8-slim-bookworm
 
 # * Python Standart Değişkenler
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONIOENCODING="UTF-8"
+
+# * Dil ve Bölge
+ENV LANGUAGE="tr_TR.UTF-8" LANG="tr_TR.UTF-8" LC_ALL="tr_TR.UTF-8" TZ="Europe/Istanbul"
 
 # * Çalışma Alanı
 WORKDIR /usr/src/UrunAPI_PY
@@ -21,9 +24,6 @@ RUN apt-get update -y && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# * Dil ve Bölge
-ENV LANGUAGE="tr_TR.UTF-8" LANG="tr_TR.UTF-8" LC_ALL="tr_TR.UTF-8" TZ="Europe/Istanbul"
 
 # * Gerekli Paketlerin Yüklenmesi
 RUN python3 -m pip install --upgrade pip && \

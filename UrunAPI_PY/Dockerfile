@@ -23,7 +23,7 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists/*
 
 # * Dil ve Bölge
-ENV LANGUAGE="tr_TR.UTF-8" LANG="tr_TR.UTF-8" LC_ALL="tr_TRC.UTF-8" TZ="Europe/Istanbul"
+ENV LANGUAGE="tr_TR.UTF-8" LANG="tr_TR.UTF-8" LC_ALL="tr_TR.UTF-8" TZ="Europe/Istanbul"
 
 # * Gerekli Paketlerin Yüklenmesi
 RUN python3 -m pip install --upgrade pip && \

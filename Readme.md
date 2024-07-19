@@ -58,7 +58,7 @@ docker compose up -d --force-recreate --no-deps --build servis_adi
 ### Gözlemle - Bağlan - Düzenle
 
 ```bash
-docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}'
+docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Size}}\t{{.Status}}'
 
 docker exec -it <container_id|container_name> bash
 ```

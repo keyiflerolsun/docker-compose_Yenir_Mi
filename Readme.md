@@ -60,6 +60,8 @@ docker compose up -d --force-recreate --no-deps --build servis_adi
 ```bash
 docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Size}}\t{{.Status}}'
 
+docker stats --no-stream --format "table {{.ID}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemPerc}}\t{{.MemUsage}}"
+
 docker exec -it <container_id|container_name> bash
 ```
 
@@ -378,8 +380,8 @@ docker run -d \
   -p 27017:27017 \
   -e MONGO_INITDB_ROOT_USERNAME=🚨🚨🚨USER🚨🚨🚨 \
   -e MONGO_INITDB_ROOT_PASSWORD=🚨🚨🚨PASS🚨🚨🚨 \
-  --auth \
-  mongo:latest
+  mongo:latest \
+  --auth
 ```
 
 #### veya

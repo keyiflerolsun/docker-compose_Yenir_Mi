@@ -1,7 +1,7 @@
 # Bu araç @keyiflerolsun tarafından | @KekikAkademi için yazılmıştır.
 
 # * Docker İmajı
-FROM python:3.11.8-slim-bookworm
+FROM python:3.13.7-slim-trixie
 
 # * Python Standart Değişkenler
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONIOENCODING="UTF-8"

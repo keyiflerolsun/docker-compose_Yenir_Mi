@@ -9,6 +9,7 @@ services:
     urunapi_py:
         container_name : urunapi_py
         image          : urunapi_py:latest
+        tty            : true
         restart        : always
         build          : ./UrunAPI_PY
 
